@@ -1,0 +1,16 @@
+POST http://localhost:9999/clientes/1/transacoes
+Content-Type: application/json
+
+{
+    "valor": 1000,
+    "tipo": "d",
+    "descricao":  "teste"
+}
+
+###
+
+GET http://localhost:9999/clientes/1/extrato
+
+###
+
+/home/thales/.asdf/installs/java/oracle-graalvm-21/bin/java -agentlib:native-image-agent=config-merge-dir=./src/main/resources/META-INF/native-image/ -jar ./build/libs/rinha-backend-2024-kotlin-0.0.1.jar
