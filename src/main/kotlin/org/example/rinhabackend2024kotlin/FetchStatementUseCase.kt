@@ -31,6 +31,7 @@ class FetchStatementUseCase(
         }
     }
 
+    @Transactional(readOnly = true)
     fun statement(customerId: Int): Mono<Map<String, Any>> {
         if (customerId > 5 || customerId < 1) return Mono.error(CustomerNotFoundException("Customer not found"))
 

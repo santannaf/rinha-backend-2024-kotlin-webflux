@@ -3,7 +3,6 @@ package org.example.rinhabackend2024kotlin
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Transactional
-import org.springframework.transaction.reactive.TransactionalOperator
 import reactor.core.publisher.Mono
 import reactor.core.scheduler.Schedulers
 
@@ -11,8 +10,7 @@ import reactor.core.scheduler.Schedulers
 @Transactional(propagation = Propagation.NEVER)
 class CreateTransactionUseCase(
     private val transactionRepository: TransactionRepository,
-    private val accountRepository: AccountRepository,
-    private val transactionalOperator: TransactionalOperator
+    private val accountRepository: AccountRepository
 ) {
     fun toEvent(request: TransactionRequest, account: Account): Mono<Pair<Transaction, Account>> {
         return Mono.fromCallable {
@@ -37,8 +35,6 @@ class CreateTransactionUseCase(
             .switchIfEmpty(Mono.error(BalanceInconsistencyException("Saldo menor que o limite estabelecido")))
             .flatMap { account -> toEvent(request, account) }
             .flatMap { event -> transactionRepository.createTransaction(event, customerId) }
-            .publishOn(Schedulers.boundedElastic())
-            .`as`(transactionalOperator::transactional)
             .map(this::factoryResponse)
             .subscribeOn(Schedulers.boundedElastic())
     }
