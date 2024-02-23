@@ -3,7 +3,6 @@ package org.example.rinhabackend2024kotlin
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Mono
-import reactor.core.scheduler.Schedulers
 
 @Repository
 class AccountPostgresRepository(
@@ -15,7 +14,5 @@ class AccountPostgresRepository(
             .filter { f -> f.returnGeneratedValues("balance", "account_limit") }
             .map { row, _ -> Account(limit = row["account_limit"] as Int, balance = row["balance"] as Int) }
             .first()
-            .publishOn(Schedulers.boundedElastic())
-//            .log()
     }
 }

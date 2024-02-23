@@ -8,5 +8,7 @@ data class Transaction(
     val amount: Long,
     val type: String,
     val description: String,
-    val createdAt: LocalDateTime = LocalDateTime.now()
+    val createdAt: LocalDateTime = LocalDateTime.now(),
+    val limit: Int,
+    val balance: Int
 )

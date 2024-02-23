@@ -4,14 +4,13 @@ import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
 import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
-import reactor.core.scheduler.Schedulers
 
 @Repository
 class TransactionPostgresRepository(
     private val r2dbcTemplate: R2dbcEntityTemplate
 ) : TransactionRepository {
     override fun createTransaction(event: Pair<Transaction, Account>, customerId: Int): Mono<Account> {
-        return r2dbcTemplate.databaseClient.sql("insert into transactions (id, customer_id, type, amount, description, created_at) values (:id, :customerId, :type, :amount, :description, :createdAt)")
+        return r2dbcTemplate.databaseClient.sql("insert into transactions (id, customer_id, type, amount, description, created_at, account_limit, balance) values (:id, :customerId, :type, :amount, :description, :createdAt, :limit, :balance)")
             .bindValues(
                 mapOf(
                     "id" to event.first.id,
@@ -19,35 +18,33 @@ class TransactionPostgresRepository(
                     "type" to event.first.type,
                     "amount" to event.first.amount,
                     "description" to event.first.description,
-                    "createdAt" to event.first.createdAt
+                    "createdAt" to event.first.createdAt,
+                    "limit" to event.first.limit,
+                    "balance" to event.first.balance,
                 )
             )
             .fetch().rowsUpdated()
-            .publishOn(Schedulers.boundedElastic())
             .thenReturn(event.second)
     }
 
-    override fun fetchStatementCustomer(customerId: Int): Flux<Statement> {
+    override fun fetchLastTenTransactions(customerId: Int): Flux<Transaction> {
         return r2dbcTemplate.databaseClient.sql(
             """
-            select
-                A.account_limit as "limit",
-                A.balance,
-                T.id,
-                T.customer_id as customerId,
-                T.type,
-                T.amount,
-                T.description,
-                T.created_at as transactionCreatedAt
-            from account A
-            left join transactions T on T.customer_id = A.customer_id
-            where A.customer_id = :customerId
-            order by T.created_at desc limit 10
-            """.trimIndent()
+            select 
+                id, 
+                type, 
+                amount, 
+                description, 
+                created_At as "createdAt", 
+                account_limit as "limit", 
+                balance 
+            from transactions T 
+            where T.customer_id = :customerId 
+            order by created_at desc limit 10
+        """.trimIndent()
         )
             .bind("customerId", customerId)
-            .mapProperties(Statement::class.java)
+            .mapProperties(Transaction::class.java)
             .all()
-            .publishOn(Schedulers.boundedElastic())
     }
 }

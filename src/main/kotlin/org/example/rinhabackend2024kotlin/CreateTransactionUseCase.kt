@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Transactional
 import reactor.core.publisher.Mono
-import reactor.core.scheduler.Schedulers
 
 @Service
 @Transactional(propagation = Propagation.NEVER)
@@ -18,7 +17,9 @@ class CreateTransactionUseCase(
                 Transaction(
                     amount = request.fetchAmount(),
                     type = TypeTransaction.valueOf(request.fetchType()).name,
-                    description = request.fetchDescription()
+                    description = request.fetchDescription(),
+                    limit = account.limit,
+                    balance = account.balance
                 ), account
             )
         }
@@ -36,6 +37,5 @@ class CreateTransactionUseCase(
             .flatMap { account -> toEvent(request, account) }
             .flatMap { event -> transactionRepository.createTransaction(event, customerId) }
             .map(this::factoryResponse)
-            .subscribeOn(Schedulers.boundedElastic())
     }
 }

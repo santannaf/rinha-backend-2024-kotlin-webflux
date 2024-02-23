@@ -11,34 +11,46 @@ import java.time.LocalDateTime
 class FetchStatementUseCase(
     private val transactionRepository: TransactionRepository
 ) {
-    private fun factoryStatementDTO(statement: List<Statement>): Mono<Map<String, Any>> {
-        return Mono.fromCallable {
-            val resume = object {
-                val limite = statement[0].limit.toInt()
-                val total = statement[0].balance.toInt()
-                val data_extrato = LocalDateTime.now()
-            }
+    val mapCustomersLimit = mapOf(1 to 1000 * 100, 2 to 800 * 100, 3 to 10000 * 100, 4 to 100000 * 100, 5 to 5000 * 100)
 
-            val response = mapOf("saldo" to resume, "ultimas_transacoes" to statement.map {
-                object {
-                    val valor = it.amount
-                    val tipo = it.type?.lowercase()
-                    val descricao = it.description
-                    val realizada_em = it.transactionCreatedAt
-                }
-            })
-            response
+    private fun factoryStatementDTO(transactions: List<Transaction>, customerId: Int): Mono<Statement> {
+        return Mono.fromCallable {
+            if (transactions.isEmpty()) {
+                val limit = mapCustomersLimit[customerId] ?: 0
+                Statement(
+                    balance = StatementBalance(
+                        limit = limit,
+                        total = 0,
+                        consultAt = LocalDateTime.now()
+                    ),
+                    lastTransactions = emptyList()
+                )
+            } else {
+                Statement(
+                    balance = StatementBalance(
+                        limit = transactions[0].limit,
+                        total = transactions[0].balance,
+                        consultAt = LocalDateTime.now()
+                    ),
+                    lastTransactions = transactions
+                        .map {
+                            StatementResumeTransaction(
+                                value = it.amount,
+                                type = it.type.lowercase(),
+                                description = it.description,
+                                transactionCreatedAt = it.createdAt
+                            )
+                        }
+                )
+            }
         }
     }
 
-    @Transactional(readOnly = true)
-    fun statement(customerId: Int): Mono<Map<String, Any>> {
+    fun statement(customerId: Int): Mono<Statement> {
         if (customerId > 5 || customerId < 1) return Mono.error(CustomerNotFoundException("Customer not found"))
-
-        return transactionRepository.fetchStatementCustomer(customerId)
-            .switchIfEmpty(Mono.error(CustomerNotFoundException("Customer not found")))
-            .buffer(10)
-            .flatMap(this::factoryStatementDTO)
+        return transactionRepository.fetchLastTenTransactions(customerId)
+            .collectList()
+            .flatMapMany { transactions -> this.factoryStatementDTO(transactions, customerId) }
             .single()
             .onErrorResume { Mono.empty() }
     }

@@ -63,6 +63,9 @@
   "name":"[Ljava.lang.Long;"
 },
 {
+  "name":"[Ljava.lang.Object;"
+},
+{
   "name":"[Ljava.lang.Short;"
 },
 {
@@ -685,6 +688,8 @@
 },
 {
   "name":"java.io.Serializable",
+  "allDeclaredFields":true,
+  "allDeclaredClasses":true,
   "queryAllDeclaredMethods":true,
   "queryAllPublicMethods":true
 },
@@ -713,7 +718,16 @@
   "name":"java.lang.Exception"
 },
 {
+  "name":"java.lang.FunctionalInterface"
+},
+{
   "name":"java.lang.Integer"
+},
+{
+  "name":"java.lang.Iterable",
+  "allDeclaredFields":true,
+  "allDeclaredClasses":true,
+  "queryAllDeclaredMethods":true
 },
 {
   "name":"java.lang.Long"
@@ -768,11 +782,13 @@
 },
 {
   "name":"java.lang.annotation.Retention",
-  "queryAllDeclaredMethods":true
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"value","parameterTypes":[] }]
 },
 {
   "name":"java.lang.annotation.Target",
-  "queryAllDeclaredMethods":true
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"value","parameterTypes":[] }]
 },
 {
   "name":"java.lang.constant.Constable",
@@ -787,12 +803,23 @@
   "queryAllPublicMethods":true
 },
 {
+  "name":"java.lang.reflect.Executable",
+  "methods":[{"name":"getParameters","parameterTypes":[] }]
+},
+{
   "name":"java.lang.reflect.GenericArrayType",
   "methods":[{"name":"getGenericComponentType","parameterTypes":[] }]
 },
 {
   "name":"java.lang.reflect.GenericDeclaration",
   "queryAllPublicMethods":true
+},
+{
+  "name":"java.lang.reflect.Method"
+},
+{
+  "name":"java.lang.reflect.Parameter",
+  "methods":[{"name":"getName","parameterTypes":[] }]
 },
 {
   "name":"java.lang.reflect.ParameterizedType",
@@ -872,16 +899,49 @@
   "queryAllDeclaredMethods":true
 },
 {
+  "name":"java.util.Collection",
+  "allDeclaredFields":true,
+  "allDeclaredClasses":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.util.Comparator"
+},
+{
   "name":"java.util.EventListener",
   "queryAllDeclaredMethods":true,
   "queryAllPublicMethods":true
 },
 {
+  "name":"java.util.Iterator"
+},
+{
+  "name":"java.util.List",
+  "allDeclaredFields":true,
+  "allDeclaredClasses":true,
+  "queryAllDeclaredMethods":true
+},
+{
   "name":"java.util.PropertyPermission"
+},
+{
+  "name":"java.util.RandomAccess",
+  "allDeclaredFields":true,
+  "allDeclaredClasses":true,
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.util.SequencedCollection",
+  "allDeclaredFields":true,
+  "allDeclaredClasses":true,
+  "queryAllDeclaredMethods":true
 },
 {
   "name":"java.util.SortedSet",
   "methods":[{"name":"getFirst","parameterTypes":[] }]
+},
+{
+  "name":"java.util.Spliterator"
 },
 {
   "name":"java.util.concurrent.Executor",
@@ -909,7 +969,22 @@
   "fields":[{"name":"base"}, {"name":"cellsBusy"}]
 },
 {
+  "name":"java.util.function.Consumer"
+},
+{
+  "name":"java.util.function.IntFunction"
+},
+{
+  "name":"java.util.function.Predicate"
+},
+{
+  "name":"java.util.function.UnaryOperator"
+},
+{
   "name":"java.util.logging.LogManager"
+},
+{
+  "name":"java.util.stream.Stream"
 },
 {
   "name":"javax.annotation.ManagedBean"
@@ -966,6 +1041,9 @@
   "name":"kotlin.Any"
 },
 {
+  "name":"kotlin.Array"
+},
+{
   "name":"kotlin.Boolean"
 },
 {
@@ -981,6 +1059,9 @@
   "name":"kotlin.Metadata",
   "queryAllDeclaredMethods":true,
   "methods":[{"name":"bv","parameterTypes":[] }, {"name":"d1","parameterTypes":[] }, {"name":"d2","parameterTypes":[] }, {"name":"k","parameterTypes":[] }, {"name":"mv","parameterTypes":[] }, {"name":"pn","parameterTypes":[] }, {"name":"xi","parameterTypes":[] }, {"name":"xs","parameterTypes":[] }]
+},
+{
+  "name":"kotlin.Nothing"
 },
 {
   "name":"kotlin.SafePublicationLazyImpl",
@@ -1011,10 +1092,54 @@
   "queryAllDeclaredMethods":true
 },
 {
-  "name":"kotlin.collections.Map"
+  "name":"kotlin.collections.Collection"
+},
+{
+  "name":"kotlin.collections.EmptyList",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"getSize","parameterTypes":[] }, {"name":"isEmpty","parameterTypes":[] }]
+},
+{
+  "name":"kotlin.collections.Iterable"
+},
+{
+  "name":"kotlin.collections.Iterator"
+},
+{
+  "name":"kotlin.collections.List"
+},
+{
+  "name":"kotlin.collections.ListIterator"
+},
+{
+  "name":"kotlin.collections.MutableCollection"
+},
+{
+  "name":"kotlin.collections.MutableIterable"
+},
+{
+  "name":"kotlin.collections.MutableIterator"
+},
+{
+  "name":"kotlin.collections.MutableList"
+},
+{
+  "name":"kotlin.collections.MutableListIterator"
+},
+{
+  "name":"kotlin.collections.RandomAccess"
+},
+{
+  "name":"kotlin.io.Serializable"
 },
 {
   "name":"kotlin.jvm.internal.DefaultConstructorMarker"
+},
+{
+  "name":"kotlin.jvm.internal.markers.KMappedMarker",
+  "queryAllDeclaredMethods":true
 },
 {
   "name":"kotlin.reflect.full.KClasses"
@@ -1189,7 +1314,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":["org.example.rinhabackend2024kotlin.TransactionRepository","org.example.rinhabackend2024kotlin.AccountRepository","org.springframework.transaction.reactive.TransactionalOperator"] }, {"name":"movement","parameterTypes":["org.example.rinhabackend2024kotlin.TransactionRequest","int"] }]
+  "methods":[{"name":"<init>","parameterTypes":["org.example.rinhabackend2024kotlin.TransactionRepository","org.example.rinhabackend2024kotlin.AccountRepository"] }, {"name":"movement","parameterTypes":["org.example.rinhabackend2024kotlin.TransactionRequest","int"] }]
 },
 {
   "name":"org.example.rinhabackend2024kotlin.CreateTransactionUseCase$$SpringCGLIB$$0",
@@ -1211,7 +1336,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":["org.example.rinhabackend2024kotlin.TransactionRepository"] }, {"name":"factoryStatementDTO","parameterTypes":["java.util.List"] }, {"name":"statement","parameterTypes":["int"] }]
+  "methods":[{"name":"<init>","parameterTypes":["org.example.rinhabackend2024kotlin.TransactionRepository"] }, {"name":"statement","parameterTypes":["int"] }]
 },
 {
   "name":"org.example.rinhabackend2024kotlin.FetchStatementUseCase$$SpringCGLIB$$0",
@@ -1219,24 +1344,31 @@
   "methods":[{"name":"CGLIB$SET_THREAD_CALLBACKS","parameterTypes":["org.springframework.cglib.proxy.Callback[]"] }]
 },
 {
-  "name":"org.example.rinhabackend2024kotlin.FetchStatementUseCase$factoryStatementDTO$1$response$1$1",
-  "allDeclaredFields":true,
-  "queryAllDeclaredMethods":true,
-  "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"getDescricao","parameterTypes":[] }, {"name":"getRealizada_em","parameterTypes":[] }, {"name":"getTipo","parameterTypes":[] }, {"name":"getValor","parameterTypes":[] }]
-},
-{
-  "name":"org.example.rinhabackend2024kotlin.FetchStatementUseCase$factoryStatementDTO$1$resume$1",
-  "allDeclaredFields":true,
-  "queryAllDeclaredMethods":true,
-  "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"getData_extrato","parameterTypes":[] }, {"name":"getLimite","parameterTypes":[] }, {"name":"getTotal","parameterTypes":[] }]
-},
-{
   "name":"org.example.rinhabackend2024kotlin.Statement",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"getBalance","parameterTypes":[] }, {"name":"getLastTransactions","parameterTypes":[] }]
+},
+{
+  "name":"org.example.rinhabackend2024kotlin.StatementBalance",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"getConsultAt","parameterTypes":[] }, {"name":"getLimit","parameterTypes":[] }, {"name":"getTotal","parameterTypes":[] }]
+},
+{
+  "name":"org.example.rinhabackend2024kotlin.StatementResumeTransaction",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[{"name":"getDescription","parameterTypes":[] }, {"name":"getTransactionCreatedAt","parameterTypes":[] }, {"name":"getType","parameterTypes":[] }, {"name":"getValue","parameterTypes":[] }]
+},
+{
+  "name":"org.example.rinhabackend2024kotlin.Transaction",
   "queryAllPublicMethods":true,
-  "fields":[{"name":"component1"}, {"name":"component2"}, {"name":"component3"}, {"name":"component4"}, {"name":"component5"}, {"name":"component6"}, {"name":"hashCode"}, {"name":"toString"}],
-  "methods":[{"name":"<init>","parameterTypes":["java.lang.String","java.lang.Long","java.lang.String","java.time.LocalDateTime","long","long"] }, {"name":"<init>","parameterTypes":["java.lang.String","java.lang.Long","java.lang.String","java.time.LocalDateTime","long","long","int","kotlin.jvm.internal.DefaultConstructorMarker"] }, {"name":"component1","parameterTypes":[] }, {"name":"component2","parameterTypes":[] }, {"name":"component3","parameterTypes":[] }, {"name":"component4","parameterTypes":[] }, {"name":"component5","parameterTypes":[] }, {"name":"component6","parameterTypes":[] }, {"name":"copy","parameterTypes":["java.lang.String","java.lang.Long","java.lang.String","java.time.LocalDateTime","long","long"] }, {"name":"equals","parameterTypes":["java.lang.Object"] }, {"name":"getAmount","parameterTypes":[] }, {"name":"getBalance","parameterTypes":[] }, {"name":"getDescription","parameterTypes":[] }, {"name":"getLimit","parameterTypes":[] }, {"name":"getTransactionCreatedAt","parameterTypes":[] }, {"name":"getType","parameterTypes":[] }, {"name":"hashCode","parameterTypes":[] }, {"name":"toString","parameterTypes":[] }]
+  "fields":[{"name":"component1"}, {"name":"component2"}, {"name":"component3"}, {"name":"component4"}, {"name":"component5"}, {"name":"component6"}, {"name":"component7"}, {"name":"hashCode"}, {"name":"toString"}],
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String","long","java.lang.String","java.lang.String","java.time.LocalDateTime","int","int"] }, {"name":"component1","parameterTypes":[] }, {"name":"component2","parameterTypes":[] }, {"name":"component3","parameterTypes":[] }, {"name":"component4","parameterTypes":[] }, {"name":"component5","parameterTypes":[] }, {"name":"component6","parameterTypes":[] }, {"name":"component7","parameterTypes":[] }, {"name":"copy","parameterTypes":["java.lang.String","long","java.lang.String","java.lang.String","java.time.LocalDateTime","int","int"] }, {"name":"equals","parameterTypes":["java.lang.Object"] }, {"name":"getAmount","parameterTypes":[] }, {"name":"getBalance","parameterTypes":[] }, {"name":"getCreatedAt","parameterTypes":[] }, {"name":"getDescription","parameterTypes":[] }, {"name":"getId","parameterTypes":[] }, {"name":"getLimit","parameterTypes":[] }, {"name":"getType","parameterTypes":[] }, {"name":"hashCode","parameterTypes":[] }, {"name":"toString","parameterTypes":[] }]
 },
 {
   "name":"org.example.rinhabackend2024kotlin.TransactionCustomConfig",
@@ -1265,7 +1397,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":["org.springframework.data.r2dbc.core.R2dbcEntityTemplate"] }, {"name":"createTransaction","parameterTypes":["kotlin.Pair","int"] }, {"name":"fetchStatementCustomer","parameterTypes":["int"] }]
+  "methods":[{"name":"<init>","parameterTypes":["org.springframework.data.r2dbc.core.R2dbcEntityTemplate"] }, {"name":"createTransaction","parameterTypes":["kotlin.Pair","int"] }, {"name":"fetchLastTenTransactions","parameterTypes":["int"] }]
 },
 {
   "name":"org.example.rinhabackend2024kotlin.TransactionPostgresRepository$$SpringCGLIB$$0",
@@ -2005,7 +2137,7 @@
   "allDeclaredFields":true,
   "queryAllDeclaredMethods":true,
   "queryAllDeclaredConstructors":true,
-  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"setInitialSize","parameterTypes":["int"] }, {"name":"setMaxLifeTime","parameterTypes":["java.time.Duration"] }, {"name":"setMaxSize","parameterTypes":["int"] }]
+  "methods":[{"name":"<init>","parameterTypes":[] }, {"name":"setInitialSize","parameterTypes":["int"] }, {"name":"setMaxLifeTime","parameterTypes":["java.time.Duration"] }, {"name":"setMaxSize","parameterTypes":["int"] }, {"name":"setValidationQuery","parameterTypes":["java.lang.String"] }]
 },
 {
   "name":"org.springframework.boot.autoconfigure.r2dbc.R2dbcTransactionManagerAutoConfiguration",
