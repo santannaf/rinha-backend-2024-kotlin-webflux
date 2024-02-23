@@ -23,7 +23,7 @@ services:
       resources:
         limits:
           cpus: '0.70'
-          memory: 138MB
+          memory: 194MB
 
   api01: &api
     image: thalessantanna/app_rinha_2024_webflux:latest
@@ -49,7 +49,7 @@ services:
       resources:
         limits:
           cpus: "0.35"
-          memory: 128MB
+          memory: 146MB
 
   api02:
     <<: *api
